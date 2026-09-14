@@ -32,8 +32,8 @@ Sim. Mesmo que o LocalEats permita fazer pedidos e filtrar restaurantes, se ele 
 | Integrante | Requisito de Qualidade | Característica ou subcaracterística | Justificativa | Como avaliar |
 | :--- | :--- | :--- | :--- | :--- |
 | Gabriel Tadeu Matiolla | O sistema deve exibir uma mensagem clara e amigável caso a pesquisa não retorne nenhum restaurante. | Usabilidade, Prevenção contra erros | No LocalEats, se o usuário buscar por um restaurante não cadastrado, ele precisa entender facilmente que a busca não teve resultados, evitando frustração ou a sensação de que o site travou. | Realizar buscas com termos inexistentes e observar se a interface exibe a mensagem de feedback adequado na tela. |
-| [Nome do Colega 2] | [Requisito formulado] | [Característica predominante] | [Justificativa aplicada ao LocalEats] | [Como observar/medir/comparar] |
-| [Nome do Colega 3] | [Requisito formulado] | [Característica predominante] | [Justificativa aplicada ao LocalEats] | [Como observar/medir/comparar] |
+| Thiago Figueiredo | [Requisito formulado] | [Característica predominante] | [Justificativa aplicada ao LocalEats] | [Como observar/medir/comparar] |
+| Henrique Adriano | [Requisito formulado] | [Característica predominante] | [Justificativa aplicada ao LocalEats] | [Como observar/medir/comparar] |
 
 ---
 
