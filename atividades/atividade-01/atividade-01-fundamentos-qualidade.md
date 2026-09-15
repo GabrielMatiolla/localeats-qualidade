@@ -22,7 +22,7 @@ Sim. Mesmo que o LocalEats permita fazer pedidos e filtrar restaurantes, se ele 
 | Integrante | Funcionalidade | O que foi realizado | O que foi observado | Evidência |
 | :--- | :--- | :--- | :--- | :--- |
 | Gabriel Tadeu Matiolla | Pesquisar restaurantes por especialidade | Realizei uma busca com o termo "Italiana" (esperado) e outra busca pesquisando por "Comida de Marte (inválido). | Na busca Válida ele me retornou 3 restaurantes Italianos, na busca inválida ele me retornou nenhum restaurante com a mensagem "Nenhum restaurante encontrado."| Gabriel - pesquisa Italiana.png |
-| Thiago Figueiredo | [Funcionalidade diferente] | [Fluxo esperado e alternativo] | [O que foi observado] | [nome-arquivo-evidencia.png] |
+| Thiago Figueiredo | Realizar Pedidos | Realizei um pedido adicionando um produto ao carrinho e finalizei o pedido (esperado). Também tentei finalizar um pedido sem adicionar nenhum item (inválido). | No uso válido, o produto foi adicionado ao pedido, o total foi atualizado e o pedido pôde ser finalizado. No uso inválido, a opção de finalizar o pedido não aparece, pois nenhum item foi adicionado. | [nome-arquivo-evidencia.png] |
 | Henrique Adriano | [Funcionalidade diferente] | [Fluxo esperado e alternativo] | [O que foi observado] | [nome-arquivo-evidencia.png] |
 
 ---
@@ -32,7 +32,7 @@ Sim. Mesmo que o LocalEats permita fazer pedidos e filtrar restaurantes, se ele 
 | Integrante | Requisito de Qualidade | Característica ou subcaracterística | Justificativa | Como avaliar |
 | :--- | :--- | :--- | :--- | :--- |
 | Gabriel Tadeu Matiolla | O sistema deve exibir uma mensagem clara e amigável caso a pesquisa não retorne nenhum restaurante. | Usabilidade, Prevenção contra erros | No LocalEats, se o usuário buscar por um restaurante não cadastrado, ele precisa entender facilmente que a busca não teve resultados, evitando frustração ou a sensação de que o site travou. | Realizar buscas com termos inexistentes e observar se a interface exibe a mensagem de feedback adequado na tela. |
-| Thiago Figueiredo | [Requisito formulado] | [Característica predominante] | [Justificativa aplicada ao LocalEats] | [Como observar/medir/comparar] |
+| Thiago Figueiredo | O sistema deve permitir que o usuário realize um pedido de forma rápida e com poucos passos, apresentando as informações do pedido de maneira clara antes da finalização. | Eficiência | No LocalEats, o usuário precisa conseguir adicionar um produto, verificar o pedido e finalizá-lo sem precisar realizar etapas desnecessárias. Isso torna o processo de realização do pedido mais rápido e prático. | Realizar um pedido desde a escolha de um produto até a finalização e observar a quantidade de etapas necessárias, verificando se o pedido pode ser concluído de forma simples e sem etapas desnecessárias. |
 | Henrique Adriano | [Requisito formulado] | [Característica predominante] | [Justificativa aplicada ao LocalEats] | [Como observar/medir/comparar] |
 
 ---
