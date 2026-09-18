@@ -33,7 +33,7 @@ Verificar se as regras de negócio críticas do LocalEats (como limite de valore
 | :--- | :--- | :--- |
 | Gabriel Tadeu Matiolla | Fazer pedido | Regra de valor mínimo de R$ 20,00 para permitir a finalização de um pedido com entrega. |
 | Thiago Figueiredo | Entrar no sistema | [Ex: Regra de bloqueio de conta após múltiplas tentativas inválidas de login.] |
-| Henrique Mello | Filtrar restaurantes por especialidade | [Ex: Exibição correta dos restaurantes que correspondem exatamente à categoria selecionada.] |
+| Henrique Mello | Filtrar restaurantes por especialidade | Exibição exclusiva dos restaurantes correspondentes à categoria selecionada e comportamento do sistema diante de filtros sem resultados. |
 
 | Funcionalidade não incluída | Justificativa |
 | :--- | :--- |
@@ -53,7 +53,7 @@ Verificar se as regras de negócio críticas do LocalEats (como limite de valore
 | Item | Definição |
 | :--- | :--- |
 | Ambiente necessário | Navegador Google Chrome atualizado; acesso à URL `https://local-eats-unisenac.vercel.app/`; contas de teste de usuário criadas; restaurantes cadastrados. |
-| Responsáveis pelo planejamento | A equipe completa (Gabriel, [Colega 2] e [Colega 3]). |
+| Responsáveis pelo planejamento | A equipe completa (Gabriel, Thiago e Henrique). |
 | Responsáveis pela especificação dos casos | Cada integrante especifica os casos da funcionalidade que escolheu. |
 | Responsáveis pela futura execução | Analistas de QA ou Desenvolvedores em esquema de teste cruzado (Peer Testing). |
 
@@ -75,7 +75,7 @@ Verificar se as regras de negócio críticas do LocalEats (como limite de valore
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | R01 | Gabriel Tadeu Matiolla | Fazer pedido | O sistema permitir a finalização de pedidos com entrega abaixo de R$ 20,00. | Prejuízo financeiro para os restaurantes devido aos custos logísticos de entregas de baixo valor. | Média | Alto | Alta | Afeta diretamente a margem de lucro e as regras contratuais com os parceiros. |
 | R02 | Thiago Figueiredo | Entrar no sistema | [Ex: Um script malicioso conseguir testar senhas infinitamente sem bloqueio.] | [Vazamento e roubo de contas de usuários.] | [Baixa/Média] | [Alto] | [Alta] | [Risco grave de segurança e exposição de dados de clientes.] |
-| R03 | Henrique Mello | Filtrar restaurantes | [Ex: O filtro de "Japonesa" exibir pizzarias (Italiana).] | [Frustração do usuário e perda de credibilidade da plataforma.] | [Média] | [Médio] | [Média] | [Atrapalha a usabilidade, mas não gera prejuízo financeiro direto imediato.] |
+| R03 | Henrique Mello | Filtrar restaurantes | Exibir restaurantes de especialidades incorretas ou falhar em limpar o filtro aplicado. | Frustração do usuário na navegação, perda de vendas por falta de visibilidade do catálogo e quebra de usabilidade. | Média | Médio | Média | Prejudica diretamente a experiência de descoberta e escolha de restaurantes pelo cliente. |
 
 ### 2.2 Aplicação da técnica
 
@@ -107,14 +107,22 @@ O requisito estabelece uma fronteira numérica exata (R$ 20,00). Erros de lógic
 *Casos derivados:* [CT03 e CT04]
 
 **Integrante responsável:** Henrique Mello
-**Funcionalidade:** [Filtrar restaurantes por especialidade]
-**Risco relacionado:** [R03]
-**Técnica escolhida:** [Particionamento de Equivalência]
+
+**Funcionalidade:** Filtrar restaurantes por especialidade
+
+**Risco relacionado:** R03
+
+**Técnica escolhida:** Particionamento de Equivalência
+
 *Por que a técnica foi escolhida?*
-[Explicar o motivo]
+A funcionalidade de filtragem trabalha com agrupamentos discretos de dados (categorias de especialidades cadastradas vs. inexistentes). Aplicar a partição em classes de equivalência permite validar todas as opções da interface reduzindo a redundância e garantindo cobertura tanto para pesquisas com retorno válido quanto para pesquisas sem resultados.
+
 *Aplicação da técnica:*
-[Mostrar categorias válidas e um termo de busca inválido]
-*Casos derivados:* [CT05 e CT06]
+- **Classe Válida 1:** Especialidade existente com estabelecimentos associados (Ex: "Japonesa").
+- **Classe Válida 2:** Troca de filtro ativo ou remoção do filtro ("Todas as especialidades").
+- **Classe Inválida:** Seleção/combinação de especialidade sem nenhum estabelecimento cadastrado no momento (Ex: "Mexicana").
+
+*Casos derivados:* CT05 e CT06.
 
 ---
 
@@ -165,11 +173,32 @@ O requisito estabelece uma fronteira numérica exata (R$ 20,00). Erros de lógic
 **CT04: [Título do segundo caso Thiago Figueiredo]**
 *(Replicar a estrutura acima)*
 
-**CT05: [Título do caso do Henrique Mello]**
-*(Replicar a estrutura acima)*
+**CT05: Filtrar estabelecimentos por categoria existente válida ("Japonesa")**
+**Integrante responsável:** Henrique Mello
+**Funcionalidade:** Filtrar restaurantes por especialidade
+**Risco relacionado:** R03
+**Técnica utilizada:** Particionamento de equivalência
+**Pré-condição:** Aplicação aberta na tela inicial ("Explorar") e restaurantes de diferentes categorias previamente cadastrados no sistema.
+**Dados de entrada:** Clique na opção/tag de especialidade "Japonesa".
+**Passos:**
+1. Acessar a página principal de exploração do LocalEats.
+2. Localizar o menu de categorias de especialidades.
+3. Clicar na categoria "Japonesa".
+4. Verificar a lista de restaurantes retornada na tela.
+**Resultado esperado:** A tela deve atualizar e listar exclusivamente os restaurantes cadastrados sob a especialidade "Japonesa", ocultando as outras categorias.
 
-**CT06: [Título do segundo caso Henrique Mello]**
-*(Replicar a estrutura acima)*
+**CT06: Exibir mensagem adequada ao filtrar especialidade sem restaurantes cadastrados**
+**Integrante responsável:** Henrique Mello
+**Funcionalidade:** Filtrar restaurantes por especialidade
+**Risco relacionado:** R03
+**Técnica utilizada:** Particionamento de equivalência
+**Pré-condição:** Usuário na tela de busca/exploração e pelo menos uma categoria sem restaurantes vinculados no banco de dados (ex.: "Mexicana").
+**Dados de entrada:** Clique na categoria "Mexicana".
+**Passos:**
+1. Acessar a página inicial de restaurantes.
+2. Selecionar a especialidade "Mexicana".
+3. Observar a listagem exibida e o estado visual da tela.
+**Resultado esperado:** O sistema não deve apresentar erro de tela em branco ou congelamento. Deve exibir um feedback claro ao usuário (ex.: *"Nenhum restaurante encontrado para esta especialidade"*) acompanhado da opção de limpar ou alterar o filtro.
 
 ### 3.2 Matriz de rastreabilidade
 
@@ -177,7 +206,7 @@ O requisito estabelece uma fronteira numérica exata (R$ 20,00). Erros de lógic
 | :--- | :--- | :--- | :--- | :--- |
 | Gabriel Tadeu Matiolla | Fazer pedido | R01: Finalizar pedido abaixo do valor mínimo | Análise de valor limite | CT01 e CT02 |
 | Thiago Figueiredo | Entrar no sistema | [R02: Bloqueio de conta por segurança] | [Técnica usada] | [CT03 e CT04] |
-| Henrique Mello | Filtrar restaurantes | [R03: Filtro trazer dados incorretos] | [Técnica usada] | [CT05 e CT06] |
+| Henrique Mello | Filtrar restaurantes | R03: Filtro trazer dados incorretos ou indisponíveis | Particionamento de equivalência | CT05 e CT06 |
 
 ---
 
@@ -187,9 +216,10 @@ O requisito estabelece uma fronteira numérica exata (R$ 20,00). Erros de lógic
 Gemini
 
 **Como foi utilizada:**
-
+A ferramenta foi consultada pontualmente para revisar a escrita dos casos de teste e garantir o alinhamento teórico na especificação das classes de equivalência (válidas e inválidas).
 
 **Uma sugestão que precisou ser alterada ou rejeitada:**
-
+A IA sugeriu criar um caso de teste injetando scripts de busca via URL. A sugestão foi descartada por fugir do escopo de testes funcionais de caixa-preta baseados na interface do usuário.
 
 **Como as respostas foram verificadas:**
+Validou-se visualmente a funcionalidade de filtros no ambiente do LocalEats (`https://local-eats-unisenac.vercel.app/`) para confirmar o comportamento real da aplicação em cada cenário.
