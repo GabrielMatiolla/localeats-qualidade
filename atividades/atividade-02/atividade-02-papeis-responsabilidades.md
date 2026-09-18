@@ -68,7 +68,7 @@ Observando a matriz, a atividade de "Revisar o código" concentra as responsabil
 
 | Prática recomendada | Problema que ajuda a resolver | Papéis envolvidos |
 | :--- | :--- | :--- |
-| Reunião de "Three Amigos" (Três Amigos) | Falta de clareza nos critérios de quando a funcionalidade está realmente pronta. | Desenvolvedor, QA e Analista de Negócio/PO. |
+| Reunião de Três Amigos | Falta de clareza nos critérios de quando a funcionalidade está realmente pronta. | Desenvolvedor, QA e Analista de Negócio/PO. |
 | Desk Check (Validação Conjunta) | Funcionalidades chegando à etapa de testes formais ou aos usuários com defeitos muito básicos. | Desenvolvedor e QA. |
 
 ---
