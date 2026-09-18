@@ -1,5 +1,27 @@
 # Atividade 1: Fundamentos e Características da Qualidade no LocalEats
 
+## Identificação
+
+**Turma:** Qualidade de Software - Terça/Noite - POA
+
+**Equipe:** - 
+
+**Data:** 11/09/2026
+
+### Integrantes
+
+| Nome | Usuário no GitHub |
+|---|---|
+| Gabriel Tadeu Matiolla | @GabrielMatiolla|
+| Thiago Figueiredo | @ThiagoF1703|
+| Henrique Mello | @eiHenriqueMello|
+
+
+**Elemento de Competência:** Compreender os fundamentos de qualidade de software e sua aplicação no desenvolvimento de sistemas.
+
+**Aplicação:** <https://local-eats-unisenac.vercel.app/>
+
+---
 ## Tarefa 1: Fundamentos da qualidade
 
 ### Necessidades
@@ -39,10 +61,10 @@ Sim. Mesmo que o LocalEats permita fazer pedidos e filtrar restaurantes, se ele 
 
 ## Uso de inteligência artificial
 
-**Ferramenta utilizada:**
+**Ferramenta utilizada:** Gemini
 
 
-**Como foi utilizada:**
+**Como foi utilizada:** Utilizada para estruturar o markdown da atividade
 
 
 **Como as respostas foram verificadas:**
