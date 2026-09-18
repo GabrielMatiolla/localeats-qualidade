@@ -40,7 +40,7 @@ Não. A qualidade é uma responsabilidade compartilhada por toda a equipe. Se ap
 | :--- | :--- | :--- | :--- | :--- |
 | Gabriel Tadeu Matiolla | Desenvolvedor | Desenvolver funcionalidades aplicando boas práticas, criar e executar testes unitários e de integração, realizar revisões de código (code review) dos colegas e corrigir defeitos identificados. | Domínio da linguagem de programação e arquitetura, conhecimento em frameworks de automação/testes unitários e versionamento de código (Git). | Colaboração e trabalho em equipe, pensamento crítico para antecipar possíveis falhas lógicas, responsabilidade e comunicação clara para relatar bloqueios técnicos. |
 | Thiago Figuereido | [QA] | [Responsabilidades] | [Competências técnicas] | [Competências comportamentais] |
-| Henrique Mello | [Papel 3, ex: Analista de Negócio / PO] | [Responsabilidades] | [Competências técnicas] | [Competências comportamentais] |
+| Henrique Mello | [ Analista de Negócio / PO ] |Definir e priorizar o backlog do produto, especificar histórias de usuário com critérios de aceitação claros, validar entregas | mapeamento de processos de negócio de delivery/alimentação e metodologias ágeis (Scrum/Kanban) | Tomada de decisão, capacidade de negociação entre necessidades de negócio e capacidade técnica, boa comunicação interpessoal e visão estratégica. |
 
 ---
 
