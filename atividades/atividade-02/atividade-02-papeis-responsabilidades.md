@@ -27,7 +27,7 @@
 | Critérios de funcionalidade pronta não estão claros | O Desenvolvedor acha que terminou, mas o PO ou QA reprovam porque faltou algo, gerando retrabalho e frustração. |
 | Defeitos são identificados, mas nem sempre registrados ou acompanhados. | Erros conhecidos são esquecidos e acabam chegando aos usuários em produção, piorando a reputação do LocalEats. |
 | Não está claro quem pode aprovar a disponibilização de uma nova versão. | O código pode subir para produção com falhas críticas porque alguém subiu sem permissão, ou o lançamento atrasa porque ninguém quer assumir a responsabilidade. |
-
+ 
 ### Justificativa (até cinco linhas)
 **A qualidade do LocalEats deve ser responsabilidade exclusiva do profissional de QA? Justifiquem.**
 Não. A qualidade é uma responsabilidade compartilhada por toda a equipe. Se apenas o QA testa no final do ciclo, ele se torna um grande problema e os bugs ficam mais caros para corrigir. O Analista deve garantir bons requisitos e o Desenvolvedor deve aplicar testes unitários e boas práticas de código, deixando o QA atuar de forma mais estratégica e preventiva.
