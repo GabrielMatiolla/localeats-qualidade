@@ -1,28 +1,30 @@
 # Atividade 3: Estratégia e Projeto de Testes do LocalEats
 
-## Identificação
+## 1. Identificação
 
 **Turma:** Qualidade de Software - Terça/Noite - POA
 
 ### Integrantes
 
 | Nome                   | Usuário no GitHub |
-| :--------------------- | :---------------- |
+| ---------------------- | ----------------- |
 | Gabriel Tadeu Matiolla | @GabrielMatiolla  |
 | Thiago Figueiredo      | @ThiagoF1703      |
 | Henrique Mello         | @eiHenriqueMello  |
+
+**Elemento de Competência:** Planejar e projetar testes selecionando técnicas adequadas.
 
 **Aplicação:** https://local-eats-unisenac.vercel.app/
 
 ---
 
-# Tarefa 1: Estratégia de testes
+# Tarefa 1: Planejamento dos testes
 
-## 1.1 Objetivo
+## 1.1 Objetivo dos testes
 
 Planejar testes para verificar se as funcionalidades selecionadas do LocalEats apresentam os comportamentos esperados em situações válidas e inválidas, considerando os principais riscos relacionados a cada funcionalidade.
 
-O planejamento busca selecionar técnicas adequadas para identificar possíveis falhas e estabelecer casos de teste com entradas, condições e resultados esperados claramente definidos.
+O planejamento busca selecionar técnicas adequadas para identificar possíveis falhas e estabelecer casos de teste com entradas, condições, passos e resultados esperados claramente definidos.
 
 ---
 
@@ -30,119 +32,80 @@ O planejamento busca selecionar técnicas adequadas para identificar possíveis 
 
 As funcionalidades selecionadas para este ciclo de testes são:
 
-| Integrante             | Funcionalidade                           | Objetivo do teste                                                                                                  |
-| :--------------------- | :--------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| Integrante             | Funcionalidade incluída                  | O que será verificado                                                                                              |
+| ---------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | Gabriel Tadeu Matiolla | Pesquisar restaurantes por especialidade | Verificar o comportamento da pesquisa quando existem restaurantes correspondentes e quando não existem resultados. |
 | Thiago Figueiredo      | Fazer pedido                             | Verificar o comportamento da realização de um pedido com produto no carrinho e com o carrinho vazio.               |
 | Henrique Mello         | Criar conta                              | Verificar o comportamento do cadastro com um e-mail ainda não cadastrado e com um e-mail já cadastrado.            |
 
-### Fora do escopo
+### Funcionalidade não incluída
 
-Não serão avaliadas neste ciclo as demais funcionalidades do LocalEats, como entrar no sistema, explorar restaurantes, favoritar ou desfavoritar restaurantes e consultar pedidos.
+| Funcionalidade não incluída           | Justificativa                                                                                                              |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Favoritar e desfavoritar restaurantes | Não faz parte das funcionalidades selecionadas pelos integrantes neste ciclo e não está relacionada aos riscos analisados. |
+
+As demais funcionalidades do LocalEats, como entrar no sistema, explorar restaurantes e consultar pedidos, também não serão avaliadas neste ciclo.
 
 ---
 
-## 1.3 Abordagem de testes
+## 1.3 Abordagem
 
-### Nível de teste
-
-**Teste de sistema:** os testes serão planejados considerando a interação do usuário com a aplicação e o comportamento das funcionalidades como um todo.
-
-### Tipo de teste
-
-**Teste funcional:** serão avaliadas as funcionalidades selecionadas de acordo com os comportamentos esperados para diferentes entradas e condições.
-
-### Perspectiva
-
-**Teste de caixa-preta:** os casos serão definidos a partir das entradas fornecidas pelo usuário e dos resultados esperados, sem considerar a implementação interna da aplicação.
-
-### Técnicas utilizadas
-
-* **Particionamento de Equivalência**
-* **Tabela de Decisão**
+| Item              | Decisão da equipe                                   | Justificativa                                                                                                                                                                                                       |
+| ----------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Níveis de teste   | Sistema                                             | Os testes serão planejados considerando a interação do usuário com a aplicação e o comportamento das funcionalidades como um todo.                                                                                  |
+| Tipos de teste    | Funcional                                           | O objetivo é verificar se as funcionalidades selecionadas apresentam os comportamentos esperados para diferentes entradas e condições.                                                                              |
+| Perspectiva       | Caixa-preta                                         | Os casos serão definidos a partir das entradas fornecidas pelo usuário e dos resultados esperados, sem considerar a implementação interna da aplicação.                                                             |
+| Técnicas de teste | Particionamento de Equivalência e Tabela de Decisão | O Particionamento de Equivalência é adequado para dividir entradas e situações em classes de comportamento. A Tabela de Decisão é adequada para relacionar condições de cadastro com as ações esperadas do sistema. |
 
 ### Justificativa das técnicas
 
-O **Particionamento de Equivalência** será utilizado para dividir as entradas em classes que representam comportamentos válidos e inválidos. Dessa forma, é possível selecionar casos representativos para cada classe.
+O **Particionamento de Equivalência** será utilizado para dividir as entradas e situações em classes que representam comportamentos válidos e inválidos. Dessa forma, é possível selecionar casos representativos para cada classe sem precisar testar todas as possibilidades.
 
-A **Tabela de Decisão** será utilizada na funcionalidade de criação de conta para relacionar diferentes condições de entrada, principalmente a situação do e-mail utilizado no cadastro, e determinar o comportamento esperado do sistema.
+A **Tabela de Decisão** será utilizada na funcionalidade de criação de conta para relacionar as condições do cadastro com as ações esperadas do sistema, principalmente considerando se o e-mail informado já está cadastrado.
 
 ---
 
 ## 1.4 Ambiente e responsabilidades
 
-### Ambiente
-
-* Navegador Google Chrome;
-* Aplicação LocalEats;
-* Conexão com a internet;
-* Dados de teste definidos para cada funcionalidade.
+| Item                                      | Definição                                                                                                                                                  |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ambiente necessário                       | Aplicação LocalEats disponível, navegador Google Chrome, computador ou notebook com acesso à internet e dados de teste definidos para cada funcionalidade. |
+| Responsáveis pelo planejamento            | Gabriel Tadeu Matiolla: pesquisa de restaurantes por especialidade; Thiago Figueiredo: realização de pedidos; Henrique Mello: criação de conta.            |
+| Responsáveis pela especificação dos casos | Cada integrante será responsável pela especificação dos casos relacionados à sua própria funcionalidade.                                                   |
+| Responsáveis pela futura execução         | Cada integrante será responsável pela futura execução dos casos relacionados à sua funcionalidade, com revisão da equipe.                                  |
 
 **Aplicação:** https://local-eats-unisenac.vercel.app/
 
-### Responsabilidades
+---
 
-| Integrante             | Responsabilidade                                                                       |
-| :--------------------- | :------------------------------------------------------------------------------------- |
-| Gabriel Tadeu Matiolla | Planejar os testes relacionados à pesquisa de restaurantes por especialidade.          |
-| Thiago Figueiredo      | Planejar os testes relacionados à realização de pedidos.                               |
-| Henrique Mello         | Planejar os testes relacionados à criação de contas.                                   |
-| Equipe                 | Revisar os riscos, técnicas e casos de teste e verificar a rastreabilidade entre eles. |
+## 1.5 Critérios
+
+| Critério  | Definição da equipe                                                                                                                                                                                                                              |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Entrada   | Aplicação disponível, funcionalidades selecionadas identificadas, riscos definidos, técnicas escolhidas, casos de teste documentados e dados necessários disponíveis.                                                                            |
+| Saída     | Todos os riscos selecionados possuem pelo menos um caso de teste relacionado, todos os casos possuem técnica, pré-condição, dados de entrada, passos e resultado esperado, e a matriz de rastreabilidade está preenchida e revisada pela equipe. |
+| Suspensão | A aplicação estiver indisponível, uma funcionalidade necessária para o teste não estiver acessível, não houver dados necessários para realizar o caso ou uma alteração na aplicação tornar o caso de teste incompatível com a versão disponível. |
 
 ---
 
-## 1.5 Critérios de entrada
+# Tarefa 2: Riscos e técnicas de teste
 
-Os testes poderão ser considerados prontos para execução quando:
+## 2.1 Análise dos riscos
 
-* A aplicação estiver disponível;
-* As funcionalidades selecionadas estiverem identificadas;
-* Os riscos relacionados às funcionalidades estiverem definidos;
-* As técnicas de teste estiverem selecionadas;
-* Os casos de teste estiverem documentados;
-* Os dados necessários para os testes estiverem definidos.
-
----
-
-## 1.6 Critérios de saída
-
-O planejamento será considerado concluído quando:
-
-* Todas as funcionalidades selecionadas possuírem pelo menos um risco identificado;
-* Todos os riscos selecionados estiverem relacionados a casos de teste;
-* Cada caso de teste possuir técnica, pré-condição, dados de entrada, passos e resultado esperado;
-* A matriz de rastreabilidade estiver preenchida;
-* Os casos de teste estiverem revisados pela equipe.
+| ID  | Integrante             | Funcionalidade                           | Risco                                                                                                                              | Consequência                                                                                                         | Probabilidade | Impacto | Prioridade | Justificativa                                                                                                                                                                                                                                   |
+| --- | ---------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------- | ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| R01 | Gabriel Tadeu Matiolla | Pesquisar restaurantes por especialidade | A pesquisa pode não retornar corretamente os restaurantes correspondentes ou não tratar adequadamente uma pesquisa sem resultados. | O usuário pode não encontrar o restaurante desejado ou pode não compreender que a pesquisa não encontrou resultados. | Média         | Média   | Média      | A pesquisa é importante para localizar restaurantes. Uma falha pode prejudicar diretamente o uso dessa funcionalidade.                                                                                                                          |
+| R02 | Thiago Figueiredo      | Fazer pedido                             | O sistema pode impedir a finalização de um pedido quando existe pelo menos um produto no carrinho.                                 | O usuário não consegue concluir o pedido.                                                                            | Média         | Alta    | Alta       | A finalização é uma etapa essencial da realização do pedido. Se ela não funcionar, o usuário não consegue concluir a operação.                                                                                                                  |
+| R03 | Thiago Figueiredo      | Fazer pedido                             | O sistema pode permitir a tentativa de finalização de um pedido com o carrinho vazio.                                              | O usuário pode tentar finalizar um pedido sem nenhum produto no carrinho.                                            | Baixa         | Alta    | Média      | Trata-se de uma condição inválida que deve ser tratada pelo sistema. A probabilidade foi considerada baixa porque, na exploração anterior, a opção de finalização não apareceu quando o carrinho estava vazio.                                  |
+| R04 | Henrique Mello         | Criar conta                              | O sistema pode permitir o cadastro de uma nova conta utilizando um e-mail que já está cadastrado.                                  | O sistema pode aceitar um cadastro que deveria ser bloqueado.                                                        | Baixa         | Alta    | Média      | A probabilidade foi considerada baixa porque, na exploração anterior, o sistema identificou o e-mail já cadastrado e apresentou uma mensagem informando a situação. O risco deve ser mantido para verificar se esse comportamento é preservado. |
 
 ---
 
-## 1.7 Critérios de suspensão
+## 2.2 Aplicação da técnica
 
-O teste poderá ser suspenso caso:
+### Integrante responsável
 
-* A aplicação esteja indisponível;
-* Uma funcionalidade necessária para o teste não esteja acessível;
-* Não seja possível fornecer os dados necessários para realizar o teste;
-* Uma alteração na aplicação torne o caso de teste incompatível com a versão disponível.
-
----
-
-# Tarefa 2: Análise de riscos e técnicas
-
-## 2.1 Riscos identificados
-
-| ID  | Integrante             | Funcionalidade                           | Risco                                                                                                                              | Consequência                                                                                                         | Probabilidade | Impacto | Prioridade | Justificativa                                                                                                                                                                                                         |
-| :-- | :--------------------- | :--------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- | :------------ | :------ | :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| R01 | Gabriel Tadeu Matiolla | Pesquisar restaurantes por especialidade | A pesquisa pode não retornar corretamente os restaurantes correspondentes ou não tratar adequadamente uma pesquisa sem resultados. | O usuário pode não encontrar o restaurante desejado ou pode não compreender que a pesquisa não encontrou resultados. | Média         | Média   | Média      | A pesquisa é importante para localizar restaurantes, mas uma falha nesse comportamento afeta principalmente a localização e a experiência de uso da funcionalidade.                                                   |
-| R02 | Thiago Figueiredo      | Fazer pedido                             | O sistema pode impedir a finalização de um pedido quando existe pelo menos um produto no carrinho.                                 | O usuário não consegue concluir o pedido.                                                                            | Média         | Alta    | Alta       | A finalização do pedido está diretamente relacionada a uma das principais funcionalidades do aplicativo. Se não funcionar, o usuário não consegue concluir a compra.                                                  |
-| R03 | Thiago Figueiredo      | Fazer pedido                             | O sistema pode permitir a tentativa de finalização de um pedido com o carrinho vazio.                                              | O usuário pode tentar finalizar um pedido sem nenhum produto no carrinho.                                            | Baixa         | Alta    | Média      | A condição é inválida e deve ser tratada pelo sistema. A probabilidade é considerada baixa porque o comportamento observado anteriormente indica que a opção de finalização não aparece quando o carrinho está vazio. |
-| R04 | Henrique Mello         | Criar conta                              | O sistema pode permitir o cadastro de uma nova conta utilizando um e-mail que já está cadastrado.                                  | Podem ser criadas contas duplicadas utilizando o mesmo e-mail.                                                       | Baixa         | Alta    | Média      | A probabilidade é baixa porque o comportamento observado anteriormente mostrou que o sistema identifica o e-mail já cadastrado, mas essa condição deve ser testada para garantir que o bloqueio seja mantido.         |
-
----
-
-## 2.2 Relação entre riscos, técnicas e casos de teste
-
-### Gabriel Tadeu Matiolla
+**Nome:** Gabriel Tadeu Matiolla
 
 **Funcionalidade:** Pesquisar restaurantes por especialidade
 
@@ -150,23 +113,27 @@ O teste poderá ser suspenso caso:
 
 **Técnica escolhida:** Particionamento de Equivalência
 
-### Justificativa
+### Por que a técnica foi escolhida?
 
-O Particionamento de Equivalência foi escolhido porque permite dividir as pesquisas em classes de entradas com comportamentos esperados diferentes.
+O Particionamento de Equivalência foi escolhido porque permite dividir as pesquisas em classes de entradas com comportamentos esperados diferentes, considerando uma especialidade que possui restaurantes correspondentes e uma especialidade sem resultados.
 
-### Classes de equivalência
+### Aplicação da técnica
 
-* **Classe válida:** especialidade que possui restaurantes correspondentes na aplicação.
-* **Classe sem resultado:** especialidade para a qual não existem restaurantes correspondentes.
+| Classe               | Situação                                                           | Exemplo           |
+| -------------------- | ------------------------------------------------------------------ | ----------------- |
+| Classe válida        | Especialidade que possui restaurantes correspondentes              | "Italiana"        |
+| Classe sem resultado | Especialidade para a qual não existem restaurantes correspondentes | "Comida de Marte" |
 
 ### Casos derivados
 
-* **CT01:** pesquisa por uma especialidade existente.
-* **CT02:** pesquisa por uma especialidade sem restaurantes correspondentes.
+* **CT01:** pesquisar por uma especialidade existente.
+* **CT02:** pesquisar por uma especialidade sem restaurantes correspondentes.
 
 ---
 
-### Thiago Figueiredo
+### Integrante responsável
+
+**Nome:** Thiago Figueiredo
 
 **Funcionalidade:** Fazer pedido
 
@@ -177,14 +144,16 @@ O Particionamento de Equivalência foi escolhido porque permite dividir as pesqu
 
 **Técnica escolhida:** Particionamento de Equivalência
 
-### Justificativa
+### Por que a técnica foi escolhida?
 
 O Particionamento de Equivalência foi escolhido porque permite dividir as situações do carrinho em classes válidas e inválidas, considerando a existência ou ausência de produtos antes da tentativa de finalização do pedido.
 
-### Classes de equivalência
+### Aplicação da técnica
 
-* **Classe válida:** carrinho possui pelo menos um produto.
-* **Classe inválida:** carrinho não possui nenhum produto.
+| Classe          | Situação                               |
+| --------------- | -------------------------------------- |
+| Classe válida   | Carrinho possui pelo menos um produto. |
+| Classe inválida | Carrinho não possui nenhum produto.    |
 
 ### Casos derivados
 
@@ -193,7 +162,9 @@ O Particionamento de Equivalência foi escolhido porque permite dividir as situa
 
 ---
 
-### Henrique Mello
+### Integrante responsável
+
+**Nome:** Henrique Mello
 
 **Funcionalidade:** Criar conta
 
@@ -201,16 +172,16 @@ O Particionamento de Equivalência foi escolhido porque permite dividir as situa
 
 **Técnica escolhida:** Tabela de Decisão
 
-### Justificativa
+### Por que a técnica foi escolhida?
 
 A Tabela de Decisão foi escolhida porque permite relacionar as condições do cadastro com as ações esperadas do sistema. Neste caso, a principal condição analisada é se o e-mail informado já está cadastrado.
 
-### Tabela de decisão
+### Aplicação da técnica
 
-| Condição / Ação                             |   CT05  |   CT06  |
-| :------------------------------------------ | :-----: | :-----: |
-| Dados de cadastro válidos                   |   Sim   |   Sim   |
-| E-mail já cadastrado                        |   Não   |   Sim   |
+| Condição / Ação                             | CT05    | CT06    |
+| ------------------------------------------- | ------- | ------- |
+| Dados de cadastro válidos                   | Sim     | Sim     |
+| E-mail já cadastrado                        | Não     | Sim     |
 | **Permitir criação da conta**               | **Sim** | **Não** |
 | **Exibir mensagem de e-mail já cadastrado** | **Não** | **Sim** |
 
@@ -221,7 +192,9 @@ A Tabela de Decisão foi escolhida porque permite relacionar as condições do c
 
 ---
 
-# Tarefa 3: Projeto dos casos de teste
+# Tarefa 3: Casos de teste e rastreabilidade
+
+## 3.1 Especificação dos casos de teste
 
 ## CT01 — Pesquisar restaurante por especialidade existente
 
@@ -395,14 +368,16 @@ O sistema deve impedir a criação de uma nova conta utilizando um e-mail já ca
 
 ---
 
-# Tarefa 4: Matriz de rastreabilidade
+## 3.2 Matriz de rastreabilidade
 
 | Integrante             | Funcionalidade                           | Risco ou requisito                                                                                                   | Técnica utilizada               | Casos de teste |
-| :--------------------- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------ | :------------- |
+| ---------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------- | -------------- |
 | Gabriel Tadeu Matiolla | Pesquisar restaurantes por especialidade | R01: A pesquisa pode não retornar corretamente os restaurantes ou não tratar adequadamente pesquisas sem resultados. | Particionamento de Equivalência | CT01 e CT02    |
 | Thiago Figueiredo      | Fazer pedido                             | R02: O sistema pode impedir a finalização de um pedido quando existe pelo menos um produto no carrinho.              | Particionamento de Equivalência | CT03           |
 | Thiago Figueiredo      | Fazer pedido                             | R03: O sistema pode permitir a tentativa de finalização de um pedido com o carrinho vazio.                           | Particionamento de Equivalência | CT04           |
 | Henrique Mello         | Criar conta                              | R04: O sistema pode permitir cadastro com e-mail já registrado.                                                      | Tabela de Decisão               | CT05 e CT06    |
+
+A matriz demonstra a relação entre cada funcionalidade analisada, seus riscos, as técnicas utilizadas e os respectivos casos de teste. Dessa forma, todos os riscos identificados possuem pelo menos um caso de teste relacionado.
 
 ---
 
@@ -412,6 +387,8 @@ O sistema deve impedir a criação de uma nova conta utilizando um e-mail já ca
 
 **Como foi utilizada:** A ferramenta foi utilizada como apoio na organização da estratégia de testes, identificação de riscos, escolha das técnicas de teste e estruturação dos casos de teste.
 
-**Como as respostas foram verificadas:** As sugestões foram comparadas com os requisitos da atividade, com as funcionalidades selecionadas e com os comportamentos observados durante a exploração do LocalEats. As sugestões que não estavam relacionadas ao escopo definido foram analisadas e não utilizadas. Um exemplo foi uma sugestão relacionada a testes de entrada de scripts/URL, que foi descartada por não estar relacionada diretamente às funcionalidades selecionadas para esta atividade.
+**Uma sugestão que precisou ser alterada ou rejeitada:** Algumas sugestões apresentadas pela ferramenta envolviam situações que não estavam relacionadas diretamente às funcionalidades selecionadas pela equipe, como testes de entrada de scripts ou URLs. Essas sugestões foram rejeitadas porque estavam fora do escopo definido para esta atividade.
 
-A equipe revisou os resultados antes de incluí-los no documento, verificando se os casos de teste possuíam pré-condições, dados de entrada, passos e resultados esperados e se havia rastreabilidade entre funcionalidades, riscos, técnicas e casos de teste.
+**Como as respostas foram verificadas:** 
+
+A equipe também revisou a rastreabilidade entre funcionalidades, riscos, técnicas e casos de teste antes de incluir as informações no documento.
