@@ -58,6 +58,13 @@ Não. A qualidade é uma responsabilidade compartilhada por toda a equipe. Se ap
 | Priorizar a correção dos defeitos | I | C | R, A |
 | Aprovar a disponibilização da versão | C | C | R, A |
 
+**Legenda:**
+* **R (Responsável):** Quem executa a tarefa e põe a mão na massa.
+* **A (Aprovador):** Quem tem a palavra final e aprova a entrega.
+* **C (Consultado):** Quem fornece informações, opiniões ou ajuda antes e durante a execução.
+* **I (Informado):** Quem apenas recebe notificações sobre o andamento ou conclusão da tarefa.
+
+
 ### Lacuna ou conflito encontrado
 Observando a matriz, a atividade de "Revisar o código" concentra as responsabilidades (R e A) exclusivamente no Desenvolvedor. Se não houver uma cultura de revisão por pares (onde um desenvolvedor revisa o código do outro), o código pode seguir para as próximas etapas sem uma dupla verificação técnica, criando um ponto cego no processo.
 
