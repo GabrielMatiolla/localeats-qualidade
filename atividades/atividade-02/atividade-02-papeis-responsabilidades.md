@@ -86,6 +86,6 @@ Observando a matriz, a atividade de "Revisar o código" concentra as responsabil
 Gemini.
 
 **Como foi utilizada:**
-Usada para estrutura o Markdown e verificação da matriz RACI.
+Usada para estruturar o Markdown e verificação da matriz RACI.
 
 **Como as respostas foram verificadas:**
