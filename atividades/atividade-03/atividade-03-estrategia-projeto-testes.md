@@ -1,225 +1,359 @@
 # Atividade 3: Estratégia e Projeto de Testes do LocalEats
 
-## 1. Identificação
+## Identificação da equipe
 
-**Turma:** Qualidade de Software - Terça/Noite - POA
-
-**Equipe:** - 
+| Integrante             | GitHub           |
+| :--------------------- | :--------------- |
+| Gabriel Tadeu Matiolla | @GabrielMatiolla |
+| Thiago Figueiredo      | @ThiagoF1703     |
+| Henrique Mello         | @eiHenriqueMello |
 
 **Data:** 18/09/2026
-
-### Integrantes
-
-| Nome | Usuário no GitHub |
-|---|---|
-| Gabriel Tadeu Matiolla | @GabrielMatiolla|
-| Thiago Figueiredo | @ThiagoF1703|
-| Henrique Mello | @eiHenriqueMello|
-
-**Elemento de Competência:** Planejar e projetar testes selecionando técnicas adequadas.
-
-**Aplicação:** <https://local-eats-unisenac.vercel.app/>
+**Aplicação:** [LocalEats](https://local-eats-unisenac.vercel.app/)
 
 ---
 
-## Tarefa 1: Planejamento dos testes
+# 1. Estratégia de Testes
 
-### 1.1 Objetivo dos testes
-Verificar se as regras de negócio críticas do LocalEats (como limite de valores para pedidos, bloqueios de segurança no login e precisão de filtros) funcionam corretamente, garantindo que o sistema impeça ações inválidas e proporcione uma experiência segura ao usuário.
+## 1.1 Objetivo dos testes
 
-### 1.2 Escopo
-
-| Integrante | Funcionalidade incluída | O que será verificado |
-| :--- | :--- | :--- |
-| Gabriel Tadeu Matiolla | Fazer pedido | Regra de valor mínimo de R$ 20,00 para permitir a finalização de um pedido com entrega. |
-| Thiago Figueiredo | Entrar no sistema | [Ex: Regra de bloqueio de conta após múltiplas tentativas inválidas de login.] |
-| Henrique Mello | Filtrar restaurantes por especialidade | Exibição exclusiva dos restaurantes correspondentes à categoria selecionada e comportamento do sistema diante de filtros sem resultados. |
-
-| Funcionalidade não incluída | Justificativa |
-| :--- | :--- |
-| Consultar pedidos | O foco atual da sprint de testes é a jornada de conversão e entrada (autenticação, busca e checkout). A consulta pós-venda será testada no próximo ciclo. |
-
-### 1.3 Abordagem
-
-| Item | Decisão da equipe | Justificativa |
-| :--- | :--- | :--- |
-| Níveis de teste | Sistema | O fluxo será analisado de ponta a ponta pela interface do usuário, validando a integração das regras. |
-| Tipos de teste | Funcional | O objetivo é validar o comportamento das regras de negócio (o "que" o sistema faz). |
-| Perspectiva | Caixa-preta | Os testes serão baseados nos requisitos e na interface (inputs e outputs), sem acesso ao código-fonte. |
-| Técnicas de teste | Análise de valor limite, Transição de estados e Particionamento de equivalência. | As regras escolhidas envolvem fronteiras numéricas (valores mínimos), contadores de estado (bloqueios) e categorias lógicas (filtros). |
-
-### 1.4 Ambiente e responsabilidades
-
-| Item | Definição |
-| :--- | :--- |
-| Ambiente necessário | Navegador Google Chrome atualizado; acesso à URL `https://local-eats-unisenac.vercel.app/`; contas de teste de usuário criadas; restaurantes cadastrados. |
-| Responsáveis pelo planejamento | A equipe completa (Gabriel, Thiago e Henrique). |
-| Responsáveis pela especificação dos casos | Cada integrante especifica os casos da funcionalidade que escolheu. |
-| Responsáveis pela futura execução | Analistas de QA ou Desenvolvedores em esquema de teste cruzado (Peer Testing). |
-
-### 1.5 Critérios
-
-| Critério | Definição da equipe |
-| :--- | :--- |
-| Entrada | Ambiente de homologação no ar, funcionalidades desenvolvidas e especificações de regras de negócio aprovadas. |
-| Saída | 100% dos casos de teste prioritários executados, sem defeitos críticos (prioridade Alta) bloqueando o fluxo principal. |
-| Suspensão | Indisponibilidade do servidor do LocalEats ou falha crítica no banco de dados que impeça a criação e manipulação de usuários e pedidos. |
+Verificar se as principais funcionalidades selecionadas do LocalEats apresentam os comportamentos esperados em situações válidas e inválidas, identificando riscos que possam prejudicar a utilização do sistema e planejando casos de teste adequados para cada situação.
 
 ---
 
-## Tarefa 2: Riscos e técnicas de teste
+## 1.2 Escopo
 
-### 2.1 Análise dos riscos
+As funcionalidades selecionadas para este ciclo de testes são:
 
-| ID | Integrante | Funcionalidade | Risco | Consequência | Probabilidade | Impacto | Prioridade | Justificativa |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| R01 | Gabriel Tadeu Matiolla | Fazer pedido | O sistema permitir a finalização de pedidos com entrega abaixo de R$ 20,00. | Prejuízo financeiro para os restaurantes devido aos custos logísticos de entregas de baixo valor. | Média | Alto | Alta | Afeta diretamente a margem de lucro e as regras contratuais com os parceiros. |
-| R02 | Thiago Figueiredo | Entrar no sistema | [Ex: Um script malicioso conseguir testar senhas infinitamente sem bloqueio.] | [Vazamento e roubo de contas de usuários.] | [Baixa/Média] | [Alto] | [Alta] | [Risco grave de segurança e exposição de dados de clientes.] |
-| R03 | Henrique Mello | Filtrar restaurantes | Exibir restaurantes de especialidades incorretas ou falhar em limpar o filtro aplicado. | Frustração do usuário na navegação, perda de vendas por falta de visibilidade do catálogo e quebra de usabilidade. | Média | Médio | Média | Prejudica diretamente a experiência de descoberta e escolha de restaurantes pelo cliente. |
+| Integrante             | Funcionalidade                           | O que será verificado                                                                                                                         |
+| :--------------------- | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| Gabriel Tadeu Matiolla | Pesquisar restaurantes por especialidade | Verificar a pesquisa por uma especialidade existente e o comportamento quando não existem restaurantes correspondentes.                       |
+| Thiago Figueiredo      | Fazer pedido                             | Verificar a adição de produtos ao carrinho, a atualização do total e o comportamento da finalização do pedido com e sem produtos no carrinho. |
+| Henrique Mello         | Criar conta                              | Verificar a criação de uma conta com dados válidos e o comportamento quando o e-mail informado já está cadastrado.                            |
 
-### 2.2 Aplicação da técnica
+### Fora do escopo
 
-**Integrante responsável:** Gabriel Tadeu Matiolla
+Neste ciclo não serão avaliadas as demais funcionalidades da aplicação, como consultar pedidos, favoritar restaurantes ou pesquisar por localização.
 
-**Funcionalidade:** Fazer pedido
+---
+
+## 1.3 Abordagem de testes
+
+### Nível de teste
+
+**Teste de sistema:** as funcionalidades serão analisadas considerando o comportamento da aplicação como um todo, a partir da interação do usuário com a interface.
+
+### Tipo de teste
+
+**Teste funcional:** serão verificadas as funções disponibilizadas pela aplicação e seus comportamentos esperados.
+
+### Perspectiva
+
+**Caixa-preta:** os testes serão planejados com base nas entradas fornecidas pelo usuário e nos resultados esperados, sem considerar a implementação interna do sistema.
+
+### Técnicas utilizadas
+
+* **Particionamento de Equivalência**
+* **Tabela de Decisão**
+
+### Justificativa
+
+O **Particionamento de Equivalência** será utilizado para dividir as entradas em classes válidas e inválidas, reduzindo a quantidade de casos necessários sem deixar de representar situações diferentes de uso.
+
+A **Tabela de Decisão** será utilizada para verificar diferentes combinações de condições no processo de criação de uma conta, principalmente considerando se os dados informados são válidos e se o e-mail já está cadastrado.
+
+---
+
+## 1.4 Ambiente e responsabilidades
+
+### Ambiente
+
+* Navegador Google Chrome;
+* Aplicação LocalEats disponível em: https://local-eats-unisenac.vercel.app/;
+* Conexão com a internet;
+* Dados de teste definidos para cada funcionalidade.
+
+### Responsabilidades
+
+| Integrante             | Responsabilidade                                                                                                           |
+| :--------------------- | :------------------------------------------------------------------------------------------------------------------------- |
+| Gabriel Tadeu Matiolla | Planejar os testes relacionados à pesquisa de restaurantes por especialidade.                                              |
+| Thiago Figueiredo      | Planejar os testes relacionados à realização de pedidos.                                                                   |
+| Henrique Mello         | Planejar os testes relacionados à criação de contas.                                                                       |
+| Equipe                 | Revisar os casos de teste, verificar a coerência dos resultados esperados e manter a rastreabilidade entre riscos e casos. |
+
+---
+
+## 1.5 Critérios de entrada, saída e suspensão
+
+### Critérios de entrada
+
+* Aplicação LocalEats disponível para acesso;
+* Funcionalidades selecionadas identificadas;
+* Riscos definidos;
+* Técnicas de teste selecionadas;
+* Dados de entrada disponíveis para a elaboração dos casos.
+
+### Critérios de saída
+
+* Todos os riscos selecionados relacionados às funcionalidades devem possuir casos de teste;
+* Todos os casos devem possuir técnica de teste definida;
+* Todos os casos devem apresentar resultados esperados observáveis;
+* A matriz de rastreabilidade deve relacionar funcionalidades, riscos, técnicas e casos de teste.
+
+### Critérios de suspensão
+
+O planejamento ou execução dos testes poderá ser suspenso caso:
+
+* A aplicação esteja indisponível;
+* Uma funcionalidade necessária para o teste não esteja acessível;
+* Não seja possível obter os dados necessários para realizar o teste;
+* Alguma alteração na aplicação impeça a utilização dos casos planejados.
+
+---
+
+# 2. Análise de Riscos e Técnicas
+
+## 2.1 Riscos identificados
+
+| ID  | Integrante             | Funcionalidade                           | Risco                                                                                                                              | Consequência                                                                                       | Probabilidade | Impacto | Prioridade |
+| :-- | :--------------------- | :--------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- | :------------ | :------ | :--------- |
+| R01 | Gabriel Tadeu Matiolla | Pesquisar restaurantes por especialidade | A pesquisa pode não retornar corretamente os restaurantes correspondentes ou não tratar adequadamente uma pesquisa sem resultados. | O usuário pode não encontrar o restaurante desejado ou não compreender que não existem resultados. | Média         | Média   | Média      |
+| R02 | Thiago Figueiredo      | Fazer pedido                             | O sistema pode impedir a finalização de um pedido quando existe pelo menos um produto no carrinho.                                 | O usuário não consegue concluir o pedido.                                                          | Média         | Alta    | Alta       |
+| R03 | Thiago Figueiredo      | Fazer pedido                             | O sistema pode permitir a tentativa de finalização de um pedido com o carrinho vazio.                                              | O sistema pode permitir uma operação inválida ou gerar inconsistência no pedido.                   | Baixa         | Alta    | Média      |
+| R04 | Henrique Mello         | Criar conta                              | O sistema pode permitir o cadastro de uma nova conta utilizando um e-mail que já está cadastrado.                                  | Podem ocorrer contas duplicadas ou inconsistências nos dados dos usuários.                         | Baixa         | Alta    | Média      |
+
+---
+
+## 2.2 Aplicação das técnicas
+
+### Gabriel Tadeu Matiolla
+
+**Funcionalidade:** Pesquisar restaurantes por especialidade
 
 **Risco relacionado:** R01
-
-**Técnica escolhida:** Análise de Valor Limite
-
-*Por que a técnica foi escolhida?*
-O requisito estabelece uma fronteira numérica exata (R$ 20,00). Erros de lógica de programação (usar `>` em vez de `>=`) costumam ocorrer exatamente nas bordas das restrições lógicas.
-
-*Aplicação da técnica:*
-- Limite inferior inválido: R$ 19,99 (Espera-se bloqueio).
-- Limite válido exato: R$ 20,00 (Espera-se aprovação).
-
-*Casos derivados:* CT01 e CT02.
-
-**Integrante responsável:** Thiago Figueiredo
-**Funcionalidade:** [Entrar no sistema]
-**Risco relacionado:** [R02]
-**Técnica escolhida:** [Transição de Estados ou Valores-Limite]
-*Por que a técnica foi escolhida?*
-[Explicar o motivo]
-*Aplicação da técnica:*
-[Apresentar transições de logado/bloqueado ou contagem de tentativas 4, 5, 6]
-*Casos derivados:* [CT03 e CT04]
-
-**Integrante responsável:** Henrique Mello
-
-**Funcionalidade:** Filtrar restaurantes por especialidade
-
-**Risco relacionado:** R03
 
 **Técnica escolhida:** Particionamento de Equivalência
 
-*Por que a técnica foi escolhida?*
-A funcionalidade de filtragem trabalha com agrupamentos discretos de dados (categorias de especialidades cadastradas vs. inexistentes). Aplicar a partição em classes de equivalência permite validar todas as opções da interface reduzindo a redundância e garantindo cobertura tanto para pesquisas com retorno válido quanto para pesquisas sem resultados.
+**Por que a técnica foi escolhida?**
 
-*Aplicação da técnica:*
-- **Classe Válida 1:** Especialidade existente com estabelecimentos associados (Ex: "Japonesa").
-- **Classe Válida 2:** Troca de filtro ativo ou remoção do filtro ("Todas as especialidades").
-- **Classe Inválida:** Seleção/combinação de especialidade sem nenhum estabelecimento cadastrado no momento (Ex: "Mexicana").
+A técnica foi escolhida porque permite dividir as pesquisas em classes de entradas válidas e inválidas, considerando uma especialidade que possui restaurantes cadastrados e uma especialidade que não possui resultados.
 
-*Casos derivados:* CT05 e CT06.
+**Aplicação da técnica:**
+
+* **Classe válida:** especialidade existente na aplicação, como "Italiana".
+* **Classe inválida:** especialidade para a qual não existem restaurantes correspondentes, como "Comida de Marte".
+
+**Casos derivados:** CT01 e CT02.
 
 ---
 
-## Tarefa 3: Casos de teste e rastreabilidade
+### Thiago Figueiredo
 
-### 3.1 Especificação dos casos de teste
-
-**CT01: Impedir finalização de pedido abaixo do valor mínimo (R$ 19,99)**
-**Integrante responsável:** Gabriel Tadeu Matiolla
 **Funcionalidade:** Fazer pedido
-**Risco relacionado:** R01
-**Técnica utilizada:** Análise de valor limite
-**Pré-condição:** Usuário autenticado, restaurante aberto, endereço cadastrado no raio de entrega e taxa de frete desconsiderada para a soma mínima.
-**Dados de entrada:** Itens no carrinho somando o subtotal exato de R$ 19,99.
-**Passos:**
-1. Acessar o restaurante selecionado.
-2. Adicionar itens ao carrinho até que o subtotal atinja R$ 19,99.
-3. Clicar no carrinho para ir à tela de checkout.
-4. Tentar clicar no botão de "Finalizar pedido".
-**Resultado esperado:** O botão de finalização deve estar desabilitado ou o sistema deve exibir uma mensagem informando que o valor mínimo para entrega é de R$ 20,00, mantendo o pedido em aberto.
 
-**CT02: Permitir finalização de pedido no valor limite exato (R$ 20,00)**
+**Riscos relacionados:**
+
+* **R02:** O sistema pode impedir a finalização de um pedido quando existe pelo menos um produto no carrinho.
+* **R03:** O sistema pode permitir a tentativa de finalização de um pedido com o carrinho vazio.
+
+**Técnica escolhida:** Particionamento de Equivalência
+
+**Por que a técnica foi escolhida?**
+
+A técnica foi escolhida porque permite dividir as situações do carrinho em classes válidas e inválidas, considerando se existe ou não pelo menos um produto antes da tentativa de finalização do pedido.
+
+**Aplicação da técnica:**
+
+* **Classe válida:** carrinho possui pelo menos um produto.
+* **Classe inválida:** carrinho não possui nenhum produto.
+
+**Casos derivados:** CT03 e CT04.
+
+---
+
+### Henrique Mello
+
+**Funcionalidade:** Criar conta
+
+**Risco relacionado:** R04
+
+**Técnica escolhida:** Tabela de Decisão
+
+**Por que a técnica foi escolhida?**
+
+A técnica foi escolhida porque permite analisar diferentes combinações de condições relacionadas aos dados utilizados no cadastro e verificar se o sistema apresenta o comportamento esperado para cada combinação.
+
+**Condições consideradas:**
+
+* Dados de cadastro válidos;
+* E-mail já cadastrado ou não cadastrado.
+
+**Casos derivados:** CT05 e CT06.
+
+---
+
+# 3. Projeto dos Casos de Teste
+
+## 3.1 Casos de teste
+
+### CT01: Pesquisar restaurantes por uma especialidade existente
+
 **Integrante responsável:** Gabriel Tadeu Matiolla
-**Funcionalidade:** Fazer pedido
+**Funcionalidade:** Pesquisar restaurantes por especialidade
 **Risco relacionado:** R01
-**Técnica utilizada:** Análise de valor limite
-**Pré-condição:** Usuário autenticado, restaurante aberto.
-**Dados de entrada:** Itens no carrinho somando o subtotal exato de R$ 20,00. Forma de pagamento válida informada.
-**Passos:**
-1. Acessar o restaurante selecionado.
-2. Adicionar itens ao carrinho até que o subtotal atinja exatamente R$ 20,00.
-3. Acessar o checkout e confirmar o endereço de entrega e pagamento.
-4. Clicar no botão de "Finalizar pedido".
-**Resultado esperado:** O sistema deve processar o pagamento e direcionar o usuário para a tela de confirmação, alterando o status do pedido para "Criado".
+**Técnica utilizada:** Particionamento de Equivalência
 
-**CT03: [Título do caso do Colega 2]**
+**Pré-condição:** A aplicação está disponível e o usuário consegue acessar a funcionalidade de pesquisa por especialidade.
+
+**Dados de entrada:** Especialidade "Italiana".
+
+**Passos:**
+
+1. Acessar a aplicação LocalEats.
+2. Acessar a funcionalidade de pesquisa por especialidade.
+3. Informar ou selecionar a especialidade "Italiana".
+4. Realizar a pesquisa.
+
+**Resultado esperado:** O sistema deve apresentar os restaurantes correspondentes à especialidade pesquisada.
+
+---
+
+### CT02: Pesquisar uma especialidade sem restaurantes correspondentes
+
+**Integrante responsável:** Gabriel Tadeu Matiolla
+**Funcionalidade:** Pesquisar restaurantes por especialidade
+**Risco relacionado:** R01
+**Técnica utilizada:** Particionamento de Equivalência
+
+**Pré-condição:** A aplicação está disponível e o usuário consegue acessar a funcionalidade de pesquisa por especialidade.
+
+**Dados de entrada:** Especialidade "Comida de Marte".
+
+**Passos:**
+
+1. Acessar a aplicação LocalEats.
+2. Acessar a funcionalidade de pesquisa por especialidade.
+3. Informar ou selecionar "Comida de Marte".
+4. Realizar a pesquisa.
+
+**Resultado esperado:** O sistema deve informar que não existem restaurantes correspondentes à pesquisa, sem apresentar restaurantes de outras especialidades como resultado.
+
+---
+
+### CT03: Finalizar pedido com produto no carrinho
+
 **Integrante responsável:** Thiago Figueiredo
-**Funcionalidade:** [Nome]
-**Risco relacionado:** [ID]
-**Técnica utilizada:** [Nome]
-**Pré-condição:** [Condição]
-**Dados de entrada:** [Dados]
+**Funcionalidade:** Fazer pedido
+**Risco relacionado:** R02
+**Técnica utilizada:** Particionamento de Equivalência
+
+**Pré-condição:** O usuário está na aplicação e existe um restaurante com pelo menos um produto disponível.
+
+**Dados de entrada:** Um produto disponível no restaurante.
+
 **Passos:**
-1. [Passo 1]
-2. [Passo 2]
-**Resultado esperado:** [Resultado]
 
-**CT04: [Título do segundo caso Thiago Figueiredo]**
-*(Replicar a estrutura acima)*
+1. Acessar um restaurante.
+2. Selecionar um produto.
+3. Adicionar o produto ao carrinho.
+4. Acessar o carrinho.
+5. Tentar finalizar o pedido.
 
-**CT05: Filtrar estabelecimentos por categoria existente válida ("Japonesa")**
-**Integrante responsável:** Henrique Mello
-**Funcionalidade:** Filtrar restaurantes por especialidade
-**Risco relacionado:** R03
-**Técnica utilizada:** Particionamento de equivalência
-**Pré-condição:** Aplicação aberta na tela inicial ("Explorar") e restaurantes de diferentes categorias previamente cadastrados no sistema.
-**Dados de entrada:** Clique na opção/tag de especialidade "Japonesa".
-**Passos:**
-1. Acessar a página principal de exploração do LocalEats.
-2. Localizar o menu de categorias de especialidades.
-3. Clicar na categoria "Japonesa".
-4. Verificar a lista de restaurantes retornada na tela.
-**Resultado esperado:** A tela deve atualizar e listar exclusivamente os restaurantes cadastrados sob a especialidade "Japonesa", ocultando as outras categorias.
-
-**CT06: Exibir mensagem adequada ao filtrar especialidade sem restaurantes cadastrados**
-**Integrante responsável:** Henrique Mello
-**Funcionalidade:** Filtrar restaurantes por especialidade
-**Risco relacionado:** R03
-**Técnica utilizada:** Particionamento de equivalência
-**Pré-condição:** Usuário na tela de busca/exploração e pelo menos uma categoria sem restaurantes vinculados no banco de dados (ex.: "Mexicana").
-**Dados de entrada:** Clique na categoria "Mexicana".
-**Passos:**
-1. Acessar a página inicial de restaurantes.
-2. Selecionar a especialidade "Mexicana".
-3. Observar a listagem exibida e o estado visual da tela.
-**Resultado esperado:** O sistema não deve apresentar erro de tela em branco ou congelamento. Deve exibir um feedback claro ao usuário (ex.: *"Nenhum restaurante encontrado para esta especialidade"*) acompanhado da opção de limpar ou alterar o filtro.
-
-### 3.2 Matriz de rastreabilidade
-
-| Integrante | Funcionalidade | Risco ou requisito | Técnica utilizada | Casos de teste |
-| :--- | :--- | :--- | :--- | :--- |
-| Gabriel Tadeu Matiolla | Fazer pedido | R01: Finalizar pedido abaixo do valor mínimo | Análise de valor limite | CT01 e CT02 |
-| Thiago Figueiredo | Entrar no sistema | [R02: Bloqueio de conta por segurança] | [Técnica usada] | [CT03 e CT04] |
-| Henrique Mello | Filtrar restaurantes | R03: Filtro trazer dados incorretos ou indisponíveis | Particionamento de equivalência | CT05 e CT06 |
+**Resultado esperado:** O produto deve ser adicionado ao carrinho, o total deve ser atualizado e o sistema deve permitir a finalização do pedido.
 
 ---
 
-## Uso de inteligência artificial
+### CT04: Tentar finalizar pedido com carrinho vazio
 
-**Ferramenta utilizada:**
-Gemini
+**Integrante responsável:** Thiago Figueiredo
+**Funcionalidade:** Fazer pedido
+**Risco relacionado:** R03
+**Técnica utilizada:** Particionamento de Equivalência
+
+**Pré-condição:** O carrinho não possui nenhum produto.
+
+**Dados de entrada:** Nenhum produto.
+
+**Passos:**
+
+1. Acessar o carrinho sem adicionar produtos.
+2. Verificar as opções disponíveis para finalização do pedido.
+3. Tentar realizar a finalização do pedido, caso a opção esteja disponível.
+
+**Resultado esperado:** O sistema não deve permitir a finalização de um pedido quando o carrinho estiver vazio.
+
+---
+
+### CT05: Criar conta com dados válidos
+
+**Integrante responsável:** Henrique Mello
+**Funcionalidade:** Criar conta
+**Risco relacionado:** R04
+**Técnica utilizada:** Tabela de Decisão
+
+**Pré-condição:** O usuário não possui uma conta cadastrada com o e-mail utilizado no teste.
+
+**Dados de entrada:**
+
+* Nome completo válido;
+* E-mail ainda não cadastrado;
+* Senha válida.
+
+**Passos:**
+
+1. Acessar a opção de criação de conta.
+2. Informar o nome completo.
+3. Informar um e-mail ainda não cadastrado.
+4. Informar uma senha válida.
+5. Confirmar o cadastro.
+
+**Resultado esperado:** O sistema deve permitir a criação da conta utilizando os dados informados.
+
+---
+
+### CT06: Tentar criar conta com e-mail já cadastrado
+
+**Integrante responsável:** Henrique Mello
+**Funcionalidade:** Criar conta
+**Risco relacionado:** R04
+**Técnica utilizada:** Tabela de Decisão
+
+**Pré-condição:** Já existe uma conta cadastrada utilizando o e-mail informado.
+
+**Dados de entrada:**
+
+* Nome completo válido;
+* E-mail já cadastrado;
+* Senha válida.
+
+**Passos:**
+
+1. Acessar a opção de criação de conta.
+2. Informar o nome completo.
+3. Informar um e-mail que já esteja cadastrado.
+4. Informar uma senha válida.
+5. Confirmar o cadastro.
+
+**Resultado esperado:** O sistema deve impedir a criação de uma nova conta com o mesmo e-mail e apresentar uma mensagem informando que o e-mail já está cadastrado.
+
+---
+
+## 3.2 Matriz de rastreabilidade
+
+| Integrante             | Funcionalidade                           | Risco ou requisito                                                                                                   | Técnica utilizada               | Casos de teste |
+| :--------------------- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------ | :------------- |
+| Gabriel Tadeu Matiolla | Pesquisar restaurantes por especialidade | R01: A pesquisa pode não retornar corretamente os restaurantes ou não tratar adequadamente pesquisas sem resultados. | Particionamento de Equivalência | CT01 e CT02    |
+| Thiago Figueiredo      | Fazer pedido                             | R02: O sistema pode impedir a finalização de pedido com produto no carrinho.                                         | Particionamento de Equivalência | CT03           |
+| Thiago Figueiredo      | Fazer pedido                             | R03: O sistema pode permitir tentativa de finalização com carrinho vazio.                                            | Particionamento de Equivalência | CT04           |
+| Henrique Mello         | Criar conta                              | R04: O sistema pode permitir cadastro com e-mail já registrado.                                                      | Tabela de Decisão               | CT05 e CT06    |
+
+---
+
+# Uso de Inteligência Artificial
+
+**Ferramenta utilizada:** Gemini.
 
 **Como foi utilizada:**
-A ferramenta foi consultada pontualmente para revisar a escrita dos casos de teste e garantir o alinhamento teórico na especificação das classes de equivalência (válidas e inválidas).
 
-**Uma sugestão que precisou ser alterada ou rejeitada:**
-A IA sugeriu criar um caso de teste injetando scripts de busca via URL. A sugestão foi descartada por fugir do escopo de testes funcionais de caixa-preta baseados na interface do usuário.
-
-**Como as respostas foram verificadas:**
-Validou-se visualmente a funcionalidade de filtros no ambiente do LocalEats (`https://local-eats-unisenac.vercel.app/`) para confirmar o comportamento real da aplicação em cada cenário.
+**Como as respostas foram verificadas:** As sugestões foram comparadas com os comportamentos observados na aplicação LocalEats durante as atividades anteriores e com os requisitos definidos para esta atividade. Foram mantidas apenas as sugestões compatíveis com as funcionalidades e comportamentos identificados pela equipe.
